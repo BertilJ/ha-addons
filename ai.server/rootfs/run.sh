@@ -23,7 +23,7 @@ fi
 export MODULES_PATH="$MODULES_PATH"
 export DATA_DIR="$DATA_DIR"
 
-# ✅ Confirm Correct Paths Before Starting
+# ✅ Debugging output to verify paths are set correctly
 echo "Forcing correct storage paths..."
 echo "MODULES_PATH is now: $MODULES_PATH"
 echo "DATA_DIR is now: $DATA_DIR"
@@ -31,11 +31,6 @@ echo "DATA_DIR is now: $DATA_DIR"
 # Create directories if they don't exist
 mkdir -p "$MODULES_PATH"
 mkdir -p "$DATA_DIR"
-
-# Debugging output
-echo "Starting AI Server with:"
-echo "  MODULES_PATH: $MODULES_PATH"
-echo "  DATA_DIR: $DATA_DIR"
 
 # ✅ Force Update `appsettings.json` to Ensure Modules Are Stored in `/config/ai-server/modules`
 APP_SETTINGS="/app/server/appsettings.json"
