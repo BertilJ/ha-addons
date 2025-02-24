@@ -28,14 +28,11 @@ echo "Starting AI Server with:"
 echo "  MODULES_PATH: $MODULES_PATH"
 echo "  DATA_DIR: $DATA_DIR"
 
-# Update appsettings.json to ensure modules persist
+# Update appsettings.json safely
 APP_SETTINGS="/app/server/appsettings.json"
 if [ -f "$APP_SETTINGS" ]; then
     TEMP_SETTINGS="${APP_SETTINGS}.new"
-    jq --arg modules "$MODULES_PATH" \
-       --arg downloads "$DATA_DIR" \
-       '.ModulesDirPath = $modules | .DownloadedModulePackagesDirPath = $downloads' \
-       "$APP_SETTINGS" > "$TEMP_SETTINGS" && mv "$TEMP_SETTINGS" "$APP_SETTINGS"
+    jq ".ModuleOptions.ModulesPath=\"$MODULES_PATH\"" "$APP_SETTINGS" > "$TEMP_SETTINGS" && mv "$TEMP_SETTINGS" "$APP_SETTINGS"
 else
     echo "Warning: appsettings.json not found, skipping modification."
 fi
