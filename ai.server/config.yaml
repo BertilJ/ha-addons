@@ -33,9 +33,9 @@ environment:
 # options:
 #   MODULES_PATH: "/config/ai-server/modules"
 #   DATA_DIR: "/config/ai-server/data"
-schema:
-  MODULES_PATH: str
-  DATA_DIR: str
+# schema:
+#   MODULES_PATH: str
+#   DATA_DIR: str
 
 
 
