@@ -15,24 +15,25 @@ DATA_DIR=$(jq --raw-output '.DATA_DIR // empty' "$CONFIG_PATH")
 
 # Validate settings
 if [ -z "$MODULES_PATH" ] || [ -z "$DATA_DIR" ]; then
-    echo "Error: MODULES_PATH or DATA_DIR is empty!"
-    exit 1
+    echo "Error: MODULES_PATH or DATA_DIR is empty! Forcing correct paths."
+    MODULES_PATH="/config/ai-server/modules"
+    DATA_DIR="/config/ai-server/downloads"
 fi
 
-# ✅ Force Environment Variables to Persist
-export MODULES_PATH="$MODULES_PATH"
-export DATA_DIR="$DATA_DIR"
+# 🔥 Manually override and export the environment variables
+export MODULES_PATH="/config/ai-server/modules"
+export DATA_DIR="/config/ai-server/downloads"
 
-# ✅ Debugging output to verify paths are set correctly
-echo "Forcing correct storage paths..."
-echo "MODULES_PATH is now: $MODULES_PATH"
-echo "DATA_DIR is now: $DATA_DIR"
+# 🔥 Verify the paths before starting
+echo "🚀 FORCING MODULE STORAGE PATHS!"
+echo "✅ MODULES_PATH is now set to: $MODULES_PATH"
+echo "✅ DATA_DIR is now set to: $DATA_DIR"
 
 # Create directories if they don't exist
 mkdir -p "$MODULES_PATH"
 mkdir -p "$DATA_DIR"
 
-# ✅ Force Update `appsettings.json` to Ensure Modules Are Stored in `/config/ai-server/modules`
+# ✅ Force update appsettings.json to ensure persistence
 APP_SETTINGS="/app/server/appsettings.json"
 if [ -f "$APP_SETTINGS" ]; then
     TEMP_SETTINGS="${APP_SETTINGS}.new"
@@ -44,10 +45,10 @@ else
     echo "Warning: appsettings.json not found, skipping modification."
 fi
 
-# ✅ Verify If Modules Directory is Now Correctly Mounted
-echo "Checking module storage path..."
+# ✅ Verify the module directory is correctly mounted
+echo "🔍 Checking if modules are stored in the correct location..."
 ls -la "$MODULES_PATH"
 
 # ✅ Start the AI Server with Correct Paths
-cd /app/server || { echo "Error: Failed to change to /app/server"; exit 1; }
+cd /app/server || { echo "❌ ERROR: Failed to change to /app/server"; exit 1; }
 exec dotnet ./CodeProject.AI.Server.dll --ApplicationDataDir="$DATA_DIR"
