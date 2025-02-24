@@ -15,16 +15,21 @@ DATA_DIR=$(jq --raw-output '.DATA_DIR // empty' "$CONFIG_PATH")
 
 # Validate settings
 if [ -z "$MODULES_PATH" ] || [ -z "$DATA_DIR" ]; then
-    echo "Error: MODULES_PATH or DATA_DIR is empty! Forcing correct paths."
+    echo "Error: MODULES_PATH or DATA_DIR is empty! Using default values."
     MODULES_PATH="/config/ai-server/modules"
     DATA_DIR="/config/ai-server/downloads"
 fi
 
-# 🔥 Manually override and export the environment variables
+# 🔥 Override and export the environment variables
 export MODULES_PATH="/config/ai-server/modules"
 export DATA_DIR="/config/ai-server/downloads"
 
-# 🔥 Verify the paths before starting
+# 🔥 Force setting environment variables globally for the container
+echo "MODULES_PATH=/config/ai-server/modules" >> /etc/environment
+echo "DATA_DIR=/config/ai-server/downloads" >> /etc/environment
+source /etc/environment  # Reload environment variables
+
+# Debugging output
 echo "🚀 FORCING MODULE STORAGE PATHS!"
 echo "✅ MODULES_PATH is now set to: $MODULES_PATH"
 echo "✅ DATA_DIR is now set to: $DATA_DIR"
@@ -33,7 +38,7 @@ echo "✅ DATA_DIR is now set to: $DATA_DIR"
 mkdir -p "$MODULES_PATH"
 mkdir -p "$DATA_DIR"
 
-# ✅ Force update appsettings.json to ensure persistence
+# ✅ Force update `appsettings.json` to ensure persistence
 APP_SETTINGS="/app/server/appsettings.json"
 if [ -f "$APP_SETTINGS" ]; then
     TEMP_SETTINGS="${APP_SETTINGS}.new"
@@ -45,7 +50,7 @@ else
     echo "Warning: appsettings.json not found, skipping modification."
 fi
 
-# ✅ Verify the module directory is correctly mounted
+# ✅ Verify if modules are now stored correctly
 echo "🔍 Checking if modules are stored in the correct location..."
 ls -la "$MODULES_PATH"
 
