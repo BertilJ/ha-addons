@@ -24,14 +24,20 @@ ports_description:
 webui: "[PROTO:http]://[HOST]:[PORT:5000]/"
 map:
   - config:rw
+  - /config/ai-server/modules:/app/modules
+  - /config/ai-server/data:/app/data
 environment:
   HA_ADDON: "true"
-  DATA_DIR: "/config/ai-server/data"
-  MODULES_PATH: "/config/ai-server/modules"
-options:
-  MODULES_PATH: "/config/ai-server/modules"
-  DATA_DIR: "/config/ai-server/data"
+  MODULES_PATH: "/app/modules"
+  DATA_DIR: "/app/data"
+# options:
+#   MODULES_PATH: "/config/ai-server/modules"
+#   DATA_DIR: "/config/ai-server/data"
 schema:
   MODULES_PATH: str
   DATA_DIR: str
+
+
+
+
 
