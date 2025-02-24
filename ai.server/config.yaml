@@ -18,10 +18,10 @@ ingress: false
 privileged:
   - PERFMON
 ports:
-  5000/tcp: 5000
+  4999/tcp: 4999
 ports_description:
-  5000/tcp: Web interface
-webui: "[PROTO:http]://[HOST]:[PORT:5000]/"
+  4999/tcp: Web interface
+webui: "[PROTO:http]://[HOST]:[PORT:4999]/"
 map:
   - config:rw
   - /config/ai-server/modules:/app/modules
