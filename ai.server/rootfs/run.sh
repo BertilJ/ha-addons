@@ -20,25 +20,25 @@ if [ -z "$MODULES_PATH" ] || [ -z "$DATA_DIR" ]; then
     DATA_DIR="/config/ai-server/downloads"
 fi
 
-# 🔥 Override and export the environment variables
+#Override and export the environment variables
 export MODULES_PATH="/config/ai-server/modules"
 export DATA_DIR="/config/ai-server/downloads"
 
-# 🔥 Force setting environment variables globally for the container
+#Force setting environment variables globally for the container
 echo "MODULES_PATH=/config/ai-server/modules" >> /etc/environment
 echo "DATA_DIR=/config/ai-server/downloads" >> /etc/environment
 source /etc/environment  # Reload environment variables
 
 # Debugging output
-echo "🚀 FORCING MODULE STORAGE PATHS!"
-echo "✅ MODULES_PATH is now set to: $MODULES_PATH"
-echo "✅ DATA_DIR is now set to: $DATA_DIR"
+echo "FORCING MODULE STORAGE PATHS!"
+echo "MODULES_PATH is now set to: $MODULES_PATH"
+echo "DATA_DIR is now set to: $DATA_DIR"
 
 # Create directories if they don't exist
 mkdir -p "$MODULES_PATH"
 mkdir -p "$DATA_DIR"
 
-# ✅ Force update `appsettings.json` to ensure persistence
+#Force update `appsettings.json` to ensure persistence
 APP_SETTINGS="/app/server/appsettings.json"
 if [ -f "$APP_SETTINGS" ]; then
     TEMP_SETTINGS="${APP_SETTINGS}.new"
@@ -50,10 +50,10 @@ else
     echo "Warning: appsettings.json not found, skipping modification."
 fi
 
-# ✅ Verify if modules are now stored correctly
-echo "🔍 Checking if modules are stored in the correct location..."
+#Verify if modules are now stored correctly
+echo "Checking if modules are stored in the correct location..."
 ls -la "$MODULES_PATH"
 
-# ✅ Start the AI Server with Correct Paths
-cd /app/server || { echo "❌ ERROR: Failed to change to /app/server"; exit 1; }
+#Start the AI Server with Correct Paths
+cd /app/server || { echo "ERROR: Failed to change to /app/server"; exit 1; }
 exec dotnet ./CodeProject.AI.Server.dll --ApplicationDataDir="$DATA_DIR"
