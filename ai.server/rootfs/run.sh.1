@@ -19,15 +19,6 @@ if [ -z "$MODULES_PATH" ] || [ -z "$DATA_DIR" ]; then
     exit 1
 fi
 
-# ✅ Force Environment Variables to Persist
-export MODULES_PATH="$MODULES_PATH"
-export DATA_DIR="$DATA_DIR"
-
-# ✅ Confirm Correct Paths Before Starting
-echo "Forcing correct storage paths..."
-echo "MODULES_PATH is now: $MODULES_PATH"
-echo "DATA_DIR is now: $DATA_DIR"
-
 # Create directories if they don't exist
 mkdir -p "$MODULES_PATH"
 mkdir -p "$DATA_DIR"
@@ -37,7 +28,7 @@ echo "Starting AI Server with:"
 echo "  MODULES_PATH: $MODULES_PATH"
 echo "  DATA_DIR: $DATA_DIR"
 
-# ✅ Force Update `appsettings.json` to Ensure Modules Are Stored in `/config/ai-server/modules`
+# Update appsettings.json to ensure modules persist
 APP_SETTINGS="/app/server/appsettings.json"
 if [ -f "$APP_SETTINGS" ]; then
     TEMP_SETTINGS="${APP_SETTINGS}.new"
@@ -49,10 +40,8 @@ else
     echo "Warning: appsettings.json not found, skipping modification."
 fi
 
-# ✅ Verify If Modules Directory is Now Correctly Mounted
-echo "Checking module storage path..."
-ls -la "$MODULES_PATH"
-
-# ✅ Start the AI Server with Correct Paths
+# Navigate to application directory
 cd /app/server || { echo "Error: Failed to change to /app/server"; exit 1; }
+
+# Start the AI server application
 exec dotnet ./CodeProject.AI.Server.dll --ApplicationDataDir="$DATA_DIR"

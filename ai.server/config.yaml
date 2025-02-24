@@ -24,8 +24,8 @@ ports_description:
 webui: "[PROTO:http]://[HOST]:[PORT:5000]/"
 map:
   - config:rw
-  - /config/ai-server/modules:/app/modules
-  - /config/ai-server/downloads:/app/data  # Match DATA_DIR location
+  - /config/ai-server/modules:/app/modules  
+  - /config/ai-server/downloads:/app/data   
 
 environment:
   HA_ADDON: "true"
@@ -34,7 +34,7 @@ environment:
 
 options:
   MODULES_PATH: "/config/ai-server/modules"
-  DATA_DIR: "/config/ai-server/downloads"  # Match mapped volume
+  DATA_DIR: "/config/ai-server/downloads"  
 
 schema:
   MODULES_PATH: str
