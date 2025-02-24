@@ -1,5 +1,5 @@
 name: CodeProject AI.Server (CPU/TPU)
-version: 2.9.5
+version: 0.1.0
 url: https://hub.docker.com/r/codeproject/ai-server
 #image: ghcr.io/bertilj/ha-addon-ai.server-{arch}
 panel_icon: mdi:face-recognition
@@ -24,18 +24,18 @@ ports_description:
 webui: "[PROTO:http]://[HOST]:[PORT:4999]/"
 map:
   - config:rw
-  - /config/ai-server/modules:/app/modules
-  - /config/ai-server/data:/app/data
+  # - /config/ai-server/modules:/app/modules
+  # - /config/ai-server/data:/app/data
 environment:
   HA_ADDON: "true"
   MODULES_PATH: "/app/modules"
   DATA_DIR: "/app/data"
-# options:
-#   MODULES_PATH: "/config/ai-server/modules"
-#   DATA_DIR: "/config/ai-server/data"
-# schema:
-#   MODULES_PATH: str
-#   DATA_DIR: str
+options:
+  MODULES_PATH: "/config/ai-server/modules"
+  DATA_DIR: "/config/ai-server/data"
+schema:
+  MODULES_PATH: str
+  DATA_DIR: str
 
 
 
