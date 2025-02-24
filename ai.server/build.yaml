@@ -1,4 +1,3 @@
----
 build_from:
-  aarch64: codeproject/ai-server:arm64-2.9.5
-  amd64: codeproject/ai-server:cpu-2.9.5
+  aarch64: codeproject/ai-server:arm64-2.9.7
+  amd64: codeproject/ai-server:2.9.7
