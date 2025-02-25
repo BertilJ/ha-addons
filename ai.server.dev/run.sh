@@ -16,3 +16,5 @@ ln -sfn /data/logs /app/logs
 # Start the AI Server
 cd /app
 exec dotnet ./CodeProject.AI-Server.dll
+
+

@@ -1,14 +1,13 @@
 ARG BUILD_FROM
-ARG AI_VERSION="2.9.7"
-FROM codeproject/ai-server:${AI_VERSION}
+FROM ${BUILD_FROM}
 
-# Set the work directory
+# Set the working directory
 WORKDIR /app
 
 # Expose API Port
 EXPOSE 32168
 
-# Persistent storage for models, config, and logs
+# Create persistent storage for models and config
 VOLUME [ "/data" ]
 
 # Copy the startup script
