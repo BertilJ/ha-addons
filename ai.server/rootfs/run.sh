@@ -38,26 +38,25 @@ echo "DATA_DIR is now set to: $DATA_DIR"
 mkdir -p "$MODULES_PATH"
 mkdir -p "$DATA_DIR"
 
-# ✅ Force update `appsettings.json` to ensure AI Server uses the correct path
+# ✅ Force update `appsettings.json` BEFORE AI Server starts
 APP_SETTINGS="/app/server/appsettings.json"
+TEMP_SETTINGS="${APP_SETTINGS}.new"
+
 if [ -f "$APP_SETTINGS" ]; then
-    TEMP_SETTINGS="${APP_SETTINGS}.new"
+    echo "✅ Overwriting appsettings.json with correct paths..."
     jq --arg modules "$MODULES_PATH" \
        --arg downloads "$DATA_DIR" \
        '.ModulesDirPath = $modules | .DownloadedModulePackagesDirPath = $downloads' \
-       "$APP_SETTINGS" > "$TEMP_SETTINGS" && mv "$TEMP_SETTINGS" "$APP_SETTINGS"
-
-    echo "✅ Forced appsettings.json update"
+       "$APP_SETTINGS" > "$TEMP_SETTINGS"
+    
+    mv "$TEMP_SETTINGS" "$APP_SETTINGS"
+    chmod 777 "$APP_SETTINGS"  # Ensure write permissions
     cat "$APP_SETTINGS" | grep ModulesDirPath  # Debugging check
 else
     echo "⚠️ Warning: appsettings.json not found, skipping modification."
 fi
 
-# ✅ Verify if modules are now stored correctly
-echo "🔍 Checking if modules are stored in the correct location..."
-ls -la "$MODULES_PATH"
-
-# ✅ Create a symbolic link from `/app/modules` to `/data/modules` (fix any hardcoded paths)
+# ✅ Create a symbolic link from `/app/modules` to `/data/modules` (Fix hardcoded paths)
 ln -sfn /data/modules /app/modules
 ln -sfn /data/downloads /app/downloads
 
