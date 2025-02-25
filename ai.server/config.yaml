@@ -1,5 +1,5 @@
 name: CodeProject AI.Server (CPU/TPU)
-version: 0.1.9
+version: 0.1.10
 url: https://hub.docker.com/r/codeproject/ai-server
 #image: ghcr.io/bertilj/ha-addon-ai.server-{arch}
 panel_icon: mdi:face-recognition
