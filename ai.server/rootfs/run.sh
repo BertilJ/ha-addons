@@ -38,11 +38,28 @@ echo "DATA_DIR is now set to: $DATA_DIR"
 mkdir -p "$MODULES_PATH"
 mkdir -p "$DATA_DIR"
 
-# ✅ Fix JSON Parsing Issue: Strip comments & control characters before modifying JSON
+# ✅ Fix `appsettings.json` by **replacing it with a clean version**
 APP_SETTINGS="/app/server/appsettings.json"
-TEMP_SETTINGS="${APP_SETTINGS}.new"
-
 if [ -f "$APP_SETTINGS" ]; then
-    echo "✅ Cleaning up appsettings.json..."
-    
-    # 🔥 Remove control characters, invalid JSON forma
+    echo "❌ appsettings.json is corrupted. Replacing it with a clean version."
+    mv "$APP_SETTINGS" "$APP_SETTINGS.bak"
+fi
+
+# ✅ Create a new valid `appsettings.json`
+cat <<EOF > "$APP_SETTINGS"
+{
+    "ModulesDirPath": "/data/modules",
+    "DownloadedModulePackagesDirPath": "/data/downloads"
+}
+EOF
+chmod 777 "$APP_SETTINGS"
+
+echo "✅ Successfully replaced appsettings.json!"
+
+# ✅ Create a symbolic link from `/app/modules` to `/data/modules` (Fix hardcoded paths)
+ln -sfn /data/modules /app/modules
+ln -sfn /data/downloads /app/downloads
+
+# ✅ Start the AI Server with Correct Paths
+cd /app/server || { echo "❌ ERROR: Failed to change to /app/server"; exit 1; }
+exec dotnet ./CodeProject.AI.Server.dll --ApplicationDataDir="$DATA_DIR"
