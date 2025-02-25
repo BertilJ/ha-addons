@@ -50,6 +50,9 @@ RUN mkdir -p /tmp/bashio && tar zxvf /tmp/bashio.tar.gz --strip 1 -C /tmp/bashio
 # Create required runtime directories
 RUN mkdir -p /run/s6/container_environment
 
+# Copy run.sh into the container
+COPY run.sh /run.sh
+
 # Ensure run.sh is executable
 RUN chmod a+x /run.sh
 
