@@ -61,16 +61,10 @@ RUN mkdir -p /tmp/bashio \
 
 RUN mkdir -p /run/s6/container_environment
 
+# Copy run.sh into the container
+COPY run.sh /run.sh
 # ✅ Ensure run.sh is executable
 RUN chmod a+x /run.sh
-
-# # ✅ Persist Only the Required Folders
-# VOLUME ["/app/modules", "/app/scripts", "/app/logs", "/app/downloads"]
-
-# # ✅ Ensure Directories Exist & Have Correct Permissions
-# RUN mkdir -p /app/modules /app/scripts /app/logs /app/downloads \
-#     && chmod -R 777 /app/modules /app/scripts /app/logs /app/downloads
-
 
 # ✅ Set Default Paths for Persistent Storage
 ENV MODULES_PATH="/app/modules"
