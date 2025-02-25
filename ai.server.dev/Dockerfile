@@ -33,7 +33,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     mkdir -p /etc/fix-attrs.d /etc/services.d
 
 # Copy root filesystem (Home Assistant-specific configuration)
-ADD --link rootfs /
+#ADD --link rootfs /
 
 # Set environment variables for Home Assistant
 ENV CONFIG_PATH=/data/options.json
