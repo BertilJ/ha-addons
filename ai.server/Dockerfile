@@ -64,12 +64,12 @@ RUN mkdir -p /run/s6/container_environment
 # ✅ Ensure run.sh is executable
 RUN chmod a+x /run.sh
 
-# ✅ Persist Only the Required Folders
-VOLUME ["/app/modules", "/app/scripts", "/app/logs", "/app/downloads"]
+# # ✅ Persist Only the Required Folders
+# VOLUME ["/app/modules", "/app/scripts", "/app/logs", "/app/downloads"]
 
-# ✅ Ensure Directories Exist & Have Correct Permissions
-RUN mkdir -p /app/modules /app/scripts /app/logs /app/downloads \
-    && chmod -R 777 /app/modules /app/scripts /app/logs /app/downloads
+# # ✅ Ensure Directories Exist & Have Correct Permissions
+# RUN mkdir -p /app/modules /app/scripts /app/logs /app/downloads \
+#     && chmod -R 777 /app/modules /app/scripts /app/logs /app/downloads
 
 
 # ✅ Set Default Paths for Persistent Storage
