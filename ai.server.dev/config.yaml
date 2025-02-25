@@ -1,5 +1,5 @@
 name: "Code Project AI"
-version: "0.1.0"
+version: "0.1.1"
 slug: "codeproject_ai"
 description: "Run AI models locally on Home Assistant OS"
 url: "https://github.com/your-repo/codeproject-ai-addon"
