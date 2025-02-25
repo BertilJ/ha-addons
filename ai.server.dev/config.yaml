@@ -1,0 +1,23 @@
+name: "Code Project AI"
+version: "0.1.0"
+slug: "codeproject_ai"
+description: "Run AI models locally on Home Assistant OS"
+url: "https://github.com/your-repo/codeproject-ai-addon"
+arch:
+  - amd64
+  - armv7
+  - aarch64
+startup: "services"
+boot: "auto"
+hassio_api: true
+host_network: false
+ports:
+  32168/tcp: 32168
+map:
+  - data:rw  # Ensures models and config persist
+options:
+  enable_debug: false
+  port: 32168
+schema:
+  enable_debug: bool
+  port: int
