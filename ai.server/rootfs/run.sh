@@ -78,8 +78,8 @@ else
 fi
 
 # ✅ Create a symbolic link from `/app/modules` to `/data/modules` (Fix hardcoded paths)
-ln -sfn /data/modules /app/modules
-ln -sfn /data/downloads /app/downloads
+# ln -sfn /data/modules /app/modules
+# ln -sfn /data/downloads /app/downloads
 
 # ✅ Start the AI Server with Correct Paths
 cd /app/server || { echo "❌ ERROR: Failed to change to /app/server"; exit 1; }
