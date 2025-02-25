@@ -39,7 +39,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 ENV CONFIG_PATH=/data/options.json
 
 # Define Home Assistant add-on metadata
-LABEL io.hass.version="2.9.5" io.hass.type="addon" io.hass.arch="aarch64|amd64"
+LABEL io.hass.version="2.9.7" io.hass.type="addon" io.hass.arch="aarch64|amd64"
 
 # Install Bashio (for Home Assistant add-on utilities)
 ADD --link https://github.com/hassio-addons/bashio/archive/v0.14.3.tar.gz /tmp/bashio.tar.gz
