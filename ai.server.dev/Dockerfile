@@ -63,5 +63,5 @@ WORKDIR /app/server
 # Clear entrypoint and define startup script
 ENTRYPOINT []
 CMD [ "/run.sh" ]
-```
+
 
