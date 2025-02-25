@@ -38,16 +38,21 @@ echo "DATA_DIR is now set to: $DATA_DIR"
 mkdir -p "$MODULES_PATH"
 mkdir -p "$DATA_DIR"
 
-# ✅ Force update `appsettings.json` BEFORE AI Server starts
+# ✅ Fix JSON Parsing Issue: Strip comments from appsettings.json before updating
 APP_SETTINGS="/app/server/appsettings.json"
 TEMP_SETTINGS="${APP_SETTINGS}.new"
 
 if [ -f "$APP_SETTINGS" ]; then
-    echo "✅ Overwriting appsettings.json with correct paths..."
+    echo "✅ Cleaning up appsettings.json..."
+    
+    # 🔥 Strip JSON comments before modifying the file
+    cat "$APP_SETTINGS" | sed -e 's/\/\/.*//g' > "${APP_SETTINGS}.cleaned"
+    
+    # ✅ Modify JSON safely with `jq`
     jq --arg modules "$MODULES_PATH" \
        --arg downloads "$DATA_DIR" \
        '.ModulesDirPath = $modules | .DownloadedModulePackagesDirPath = $downloads' \
-       "$APP_SETTINGS" > "$TEMP_SETTINGS"
+       "${APP_SETTINGS}.cleaned" > "$TEMP_SETTINGS"
     
     mv "$TEMP_SETTINGS" "$APP_SETTINGS"
     chmod 777 "$APP_SETTINGS"  # Ensure write permissions
