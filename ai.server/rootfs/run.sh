@@ -50,4 +50,5 @@ fi
 # mkdir -p "$DATA_DIR"
 
 # Run the AI server with the correct application data directory
-cd /app/server && dotnet ./CodeProject.AI.Server.dll --ApplicationDataDir="$DATA_DIR"
+#cd /app/server && dotnet ./CodeProject.AI.Server.dll --ApplicationDataDir="/share/ai-server/data"
+cd /app/server && MODULES_PATH="/share/ai-server/modules" dotnet ./CodeProject.AI.Server.dll --ApplicationDataDir="$DATA_DIR"
