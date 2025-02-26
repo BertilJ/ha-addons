@@ -25,8 +25,8 @@ ports_description:
   32168/tcp: Web interface
 webui: "[PROTO:http]://[HOST]:[PORT:32168]/"
 
-# map:
-#   - share:rw
+map:
+  - share:rw
 
 environment:
   HA_ADDON: "true"
