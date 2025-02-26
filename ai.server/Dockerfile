@@ -41,7 +41,7 @@ ADD --link rootfs /
 
 ENV CONFIG_PATH=/data/options.json
 LABEL \
-  io.hass.version="0.1.3" \
+  io.hass.version="0.1.5" \
   io.hass.type="addon" \
   io.hass.arch="aarch64|amd64"
 

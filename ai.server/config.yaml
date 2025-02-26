@@ -1,5 +1,5 @@
 name: CodeProject AI.Server (CPU)
-version: 0.1.4
+version: 0.1.5
 url: https://hub.docker.com/r/codeproject/ai-server
 #image: 
 panel_icon: mdi:face-recognition
@@ -23,22 +23,21 @@ ports_description:
   5000/tcp: Web interface
 webui: "[PROTO:http]://[HOST]:[PORT:5000]/"
 map:
-  - config:rw
-  - share:rw  # Share folder can be used for persistent storage
+  - share:rw
 
 environment:
   HA_ADDON: "true"
-  DATA_DIR: "/share/ai-server/data"
-  MODULES_PATH: "/share/ai-server/modules"
-  OPT_PATH: "/share/ai-server/modules"  # New mapping
+#   DATA_DIR: "/share/ai-server/data"
+#   MODULES_PATH: "/share/ai-server/modules"
+#   OPT_PATH: "/share/ai-server/modules"  # New mapping
 
-options:
-  MODULES_PATH: "/share/ai-server/modules"
-  DATA_DIR: "/share/ai-server/data"
-  OPT_PATH: "/share/ai-server/modules"  # New mapping
+# options:
+#   MODULES_PATH: "/share/ai-server/modules"
+#   DATA_DIR: "/share/ai-server/data"
+#   OPT_PATH: "/share/ai-server/modules"  # New mapping
 
-schema:
-  MODULES_PATH: str
-  DATA_DIR: str
-  OPT_PATH: str
+# schema:
+#   MODULES_PATH: str
+#   DATA_DIR: str
+#   OPT_PATH: str
 
