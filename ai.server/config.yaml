@@ -1,5 +1,5 @@
 name: CodeProject AI.Server (CPU)
-version: 0.1.2
+version: 0.1.3
 url: https://hub.docker.com/r/codeproject/ai-server
 #image: 
 panel_icon: mdi:face-recognition
@@ -30,9 +30,15 @@ environment:
   HA_ADDON: "true"
   DATA_DIR: "/share/ai-server/data"
   MODULES_PATH: "/share/ai-server/modules"
+  OPT_PATH: "/share/ai-server/modules"  # New mapping
+
 options:
   MODULES_PATH: "/share/ai-server/modules"
   DATA_DIR: "/share/ai-server/data"
+  OPT_PATH: "/share/ai-server/modules"  # New mapping
+
 schema:
   MODULES_PATH: str
   DATA_DIR: str
+  OPT_PATH: str
+

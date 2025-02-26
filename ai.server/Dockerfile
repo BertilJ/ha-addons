@@ -41,7 +41,7 @@ ADD --link rootfs /
 
 ENV CONFIG_PATH=/data/options.json
 LABEL \
-  io.hass.version="0.1.2" \
+  io.hass.version="0.1.3" \
   io.hass.type="addon" \
   io.hass.arch="aarch64|amd64"
 
@@ -59,13 +59,14 @@ RUN mkdir -p /run/s6/container_environment
 RUN chmod a+x /run.sh
 
 # Ensure persistent directories exist
-RUN mkdir -p /etc/codeproject/ai /app/modules
+RUN mkdir -p /etc/codeproject/ai /app/modules /opt/codeproject/ai
 
-# Use the correct directories
-VOLUME [ "/etc/codeproject/ai", "/app/modules" ]
+VOLUME [ "/etc/codeproject/ai", "/app/modules", "/opt/codeproject/ai" ]
 
-# Ensure permissions
-RUN chmod -R 777 /etc/codeproject/ai /app/modules
+# Ensure directories exist and have correct permissions
+RUN mkdir -p /etc/codeproject/ai /app/modules /opt/codeproject/ai \
+    && chmod -R 777 /etc/codeproject/ai /app/modules /opt/codeproject/ai
+
 
 WORKDIR /app/server
 ENTRYPOINT []
