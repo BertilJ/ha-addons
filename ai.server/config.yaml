@@ -1,7 +1,7 @@
-name: CodeProject AI.Server (CPU/TPU)
-version: 0.1.18
+name: CodeProject AI.Server (CPU)
+version: 0.1.0
 url: https://hub.docker.com/r/codeproject/ai-server
-#image: ghcr.io/bertilj/ha-addon-ai.server-{arch}
+image: ghcr.io/skrashevich/hassio-addon-ai.server-{arch}
 panel_icon: mdi:face-recognition
 slug: ai.server
 description: standalone open-source AI server
@@ -22,40 +22,15 @@ ports:
 ports_description:
   5000/tcp: Web interface
 webui: "[PROTO:http]://[HOST]:[PORT:5000]/"
-
 map:
   - config:rw
-  - share:rw
-  # - /config/ai-server/modules:/app/modules
-  # - /config/ai-server/scripts:/app/scripts
-  # - /config/ai-server/logs:/app/logs
-  # - /config/ai-server/downloads:/app/downloads
-
-
-
 environment:
   HA_ADDON: "true"
+  DATA_DIR: "/config/ai-server/data"
   MODULES_PATH: "/config/ai-server/modules"
-  DATA_DIR: "/config/ai-server/downloads"
-  LOGS_PATH: "/config/ai-server/logs"
-  SCRIPTS_PATH: "/config/ai-server/scripts"
-
 options:
   MODULES_PATH: "/config/ai-server/modules"
-  DATA_DIR: "/config/ai-server/downloads"
-  LOGS_PATH: "/config/ai-server/logs"
-  SCRIPTS_PATH: "/config/ai-server/scripts"
-
+  DATA_DIR: "/config/ai-server/data"
 schema:
   MODULES_PATH: str
   DATA_DIR: str
-  LOGS_PATH: str
-  SCRIPTS_PATH: str
-
-
-
-
-
-
-
-
