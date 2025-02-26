@@ -1,5 +1,5 @@
 name: CodeProject AI.Server (CPU)
-version: 0.1.8
+version: 0.1.9
 url: https://hub.docker.com/r/codeproject/ai-server
 #image: 
 panel_icon: mdi:face-recognition
