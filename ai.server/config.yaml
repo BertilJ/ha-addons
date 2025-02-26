@@ -18,10 +18,13 @@ ingress: false
 privileged:
   - PERFMON
 ports:
-  5000/tcp: 5000
+#  5000/tcp: 5000
+  32168/tcp: 32168
 ports_description:
-  5000/tcp: Web interface
-webui: "[PROTO:http]://[HOST]:[PORT:5000]/"
+#  5000/tcp: Web interface
+  32168/tcp: Web interface
+webui: "[PROTO:http]://[HOST]:[PORT:32168]/"
+
 map:
   - share:rw
 
