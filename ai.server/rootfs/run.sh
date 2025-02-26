@@ -39,9 +39,9 @@ ls -la /share/ai-server
 mkdir -p "$MODULES_PATH"
 mkdir -p "$DATA_DIR"
 
-# Fix appsettings.json to use the correct modules path
-cat /app/server/appsettings.json | sed -e 's/\/\/ .*$//g' | jq ".ModuleOptions.ModulesPath=\"$MODULES_PATH\"" > /app/server/appsettings.json.new
-mv /app/server/appsettings.json.new /app/server/appsettings.json
+# # Fix appsettings.json to use the correct modules path
+# cat /app/server/appsettings.json | sed -e 's/\/\/ .*$//g' | jq ".ModuleOptions.ModulesPath=\"$MODULES_PATH\"" > /app/server/appsettings.json.new
+# mv /app/server/appsettings.json.new /app/server/appsettings.json
 
 # Run the AI server with the correct application data directory
 cd /app/server && dotnet ./CodeProject.AI.Server.dll --ApplicationDataDir="$DATA_DIR"
