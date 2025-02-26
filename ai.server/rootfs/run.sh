@@ -11,8 +11,9 @@ mkdir -p /share/ai-server/modules
 # mkdir -p /share/ai-server/downloads/modules/packages
 # mkdir -p /share/ai-server/opt
 # Modify appsettings.json to use /share/ai-server/modules
-jq '.ModuleOptions += {"ModulesDirPath": "/share/ai-server/modules"}' /app/server/appsettings.json > /app/server/appsettings.json.new
-mv /app/server/appsettings.json.new /app/server/appsettings.json
+# Ensure the correct module path is set without breaking formatting
+sed -i 's|%ROOT_PATH%/modules|/share/ai-server/modules|g' /app/server/appsettings.json
+
 
 
 
