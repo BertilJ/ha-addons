@@ -1,7 +1,7 @@
 name: CodeProject AI.Server (CPU)
 version: 0.1.0
 url: https://hub.docker.com/r/codeproject/ai-server
-image: 
+#image: 
 panel_icon: mdi:face-recognition
 slug: ai.server
 description: standalone open-source AI server
