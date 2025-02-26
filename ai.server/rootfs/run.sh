@@ -4,7 +4,7 @@ CONFIG_PATH=/data/options.json
 # Load paths from options.json (or use default locations)
 # export MODULES_PATH=$(jq --raw-output '.MODULES_PATH // "/app/modules"' $CONFIG_PATH)
 # export DATA_DIR=$(jq --raw-output '.DATA_DIR // "/etc/codeproject/ai"' $CONFIG_PATH)
-
+export MODULES_PATH="/share/ai-server/modules"
 # Ensure Home Assistant storage exists
 mkdir -p /share/ai-server/data
 mkdir -p /share/ai-server/modules
@@ -45,10 +45,13 @@ mkdir -p /share/ai-server/modules
 # ls -la /app/downloads/modules/packages
 # ls -la /share/ai-server
 # ls -la /opt/codeproject/ai
+printenv | grep MODULES_PATH  # Check if MODULES_PATH is set
 
-# mkdir -p "$MODULES_PATH"
-# mkdir -p "$DATA_DIR"
+mkdir -p "$MODULES_PATH"
+mkdir -p "$DATA_DIR"
 
 # Run the AI server with the correct application data directory
 #cd /app/server && dotnet ./CodeProject.AI.Server.dll --ApplicationDataDir="/share/ai-server/data"
-cd /app/server && MODULES_PATH="/share/ai-server/modules" dotnet ./CodeProject.AI.Server.dll --ApplicationDataDir="/share/ai-server/data"
+cd /app/server 
+export MODULES_PATH="/share/ai-server/modules"
+dotnet ./CodeProject.AI.Server.dll --ApplicationDataDir="/share/ai-server/data"
