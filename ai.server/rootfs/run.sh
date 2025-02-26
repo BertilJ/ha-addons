@@ -11,8 +11,9 @@ mkdir -p /share/ai-server/modules
 # mkdir -p /share/ai-server/downloads/modules/packages
 # mkdir -p /share/ai-server/opt
 # Modify appsettings.json to use /share/ai-server/modules
-jq '.ModuleOptions.ModulesDirPath="/share/ai-server/modules"' /app/server/appsettings.json > /app/server/appsettings.json.new
+jq '.ModuleOptions += {"ModulesDirPath": "/share/ai-server/modules"}' /app/server/appsettings.json > /app/server/appsettings.json.new
 mv /app/server/appsettings.json.new /app/server/appsettings.json
+
 
 
 # # Bind /etc/codeproject/ai to /share/ai-server/data (Already working)
@@ -50,11 +51,11 @@ mv /app/server/appsettings.json.new /app/server/appsettings.json
 # ls -la /opt/codeproject/ai
 # printenv | grep MODULES_PATH  # Check if MODULES_PATH is set
 
-mkdir -p "$MODULES_PATH"
-mkdir -p "$DATA_DIR"
+# mkdir -p "$MODULES_PATH"
+# mkdir -p "$DATA_DIR"
 
 # Run the AI server with the correct application data directory
 #cd /app/server && dotnet ./CodeProject.AI.Server.dll --ApplicationDataDir="/share/ai-server/data"
 cd /app/server 
-export MODULES_PATH="/share/ai-server/modules"
+# export MODULES_PATH="/share/ai-server/modules"
 dotnet ./CodeProject.AI.Server.dll --ApplicationDataDir="/share/ai-server/data"
