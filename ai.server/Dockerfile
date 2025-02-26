@@ -57,6 +57,16 @@ RUN mkdir -p /tmp/bashio \
 RUN mkdir -p /run/s6/container_environment
 
 RUN chmod a+x /run.sh
+
+# Ensure persistent directories exist
+RUN mkdir -p /etc/codeproject/ai /app/modules
+
+# Use the correct directories
+VOLUME [ "/etc/codeproject/ai", "/app/modules" ]
+
+# Ensure permissions
+RUN chmod -R 777 /etc/codeproject/ai /app/modules
+
 WORKDIR /app/server
 ENTRYPOINT []
 CMD [ "/run.sh" ]

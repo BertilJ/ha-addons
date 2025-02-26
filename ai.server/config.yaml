@@ -24,13 +24,15 @@ ports_description:
 webui: "[PROTO:http]://[HOST]:[PORT:5000]/"
 map:
   - config:rw
+  - share:rw  # Share folder can be used for persistent storage
+
 environment:
   HA_ADDON: "true"
-  DATA_DIR: "/config/ai-server/data"
-  MODULES_PATH: "/config/ai-server/modules"
+  DATA_DIR: "/share/ai-server/data"
+  MODULES_PATH: "/share/ai-server/modules"
 options:
-  MODULES_PATH: "/config/ai-server/modules"
-  DATA_DIR: "/config/ai-server/data"
+  MODULES_PATH: "/share/ai-server/modules"
+  DATA_DIR: "/share/ai-server/data"
 schema:
   MODULES_PATH: str
   DATA_DIR: str
