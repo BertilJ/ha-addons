@@ -4,12 +4,15 @@ CONFIG_PATH=/data/options.json
 # Load paths from options.json (or use default locations)
 # export MODULES_PATH=$(jq --raw-output '.MODULES_PATH // "/app/modules"' $CONFIG_PATH)
 # export DATA_DIR=$(jq --raw-output '.DATA_DIR // "/etc/codeproject/ai"' $CONFIG_PATH)
-export MODULES_PATH="/share/ai-server/modules"
+# export MODULES_PATH="/share/ai-server/modules"
 # Ensure Home Assistant storage exists
 mkdir -p /share/ai-server/data
 mkdir -p /share/ai-server/modules
 # mkdir -p /share/ai-server/downloads/modules/packages
 # mkdir -p /share/ai-server/opt
+# Modify appsettings.json to use /share/ai-server/modules
+jq '.ModuleOptions.ModulesDirPath="/share/ai-server/modules"' /app/server/appsettings.json > /app/server/appsettings.json.new
+mv /app/server/appsettings.json.new /app/server/appsettings.json
 
 
 # # Bind /etc/codeproject/ai to /share/ai-server/data (Already working)
@@ -45,7 +48,7 @@ mkdir -p /share/ai-server/modules
 # ls -la /app/downloads/modules/packages
 # ls -la /share/ai-server
 # ls -la /opt/codeproject/ai
-printenv | grep MODULES_PATH  # Check if MODULES_PATH is set
+# printenv | grep MODULES_PATH  # Check if MODULES_PATH is set
 
 mkdir -p "$MODULES_PATH"
 mkdir -p "$DATA_DIR"
